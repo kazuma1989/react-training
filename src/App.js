@@ -7,7 +7,7 @@ class App extends Component {
     return (
       <div>
         <h1>Tic Tac Toe</h1>
-        <p><a href="https://codepen.io/gaearon/pen/oWWQNa?editors=0100">at codepen</a></p>
+        <p><a href="https://reactjs.org/tutorial/tutorial.html">React Tutorial</a></p>
         <Game />
       </div>
     );
