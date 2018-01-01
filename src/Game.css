@@ -37,6 +37,10 @@ ul {
     outline: none;
 }
 
+.highlight {
+    color: red;
+}
+
 .kbd-navigation .square:focus {
     background: #ddd;
 }
