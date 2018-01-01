@@ -12,6 +12,7 @@ class Board extends React.Component {
   renderSquare(i) {
     return (
       <Square
+        key={i}
         value={this.props.squares[i]}
         onClick={() => this.props.onClick(i)}
       />
@@ -23,7 +24,7 @@ class Board extends React.Component {
       <div>
         {[...Array(3).keys()].map(j => {
           return (
-            <div className="board-row">
+            <div key={j} className="board-row">
               {[...Array(3 * j + 3).keys()].slice(3 * j).map(i => this.renderSquare(i))}
             </div>
           ); 
@@ -40,6 +41,7 @@ export class Game extends React.Component {
     const squares = Array(9).fill(null);
     const xIsNext = true;
     const stepNumber = 0;
+    const ascSort = true;
 
     this.state = {
       history: [
@@ -47,7 +49,10 @@ export class Game extends React.Component {
       ],
       stepNumber,
       xIsNext,
+      ascSort,
     };
+
+    this.toggleSort = this.toggleSort.bind(this);
   }
 
   handleClick(i) {
@@ -81,6 +86,14 @@ export class Game extends React.Component {
     });
   }
 
+  toggleSort() {
+    this.setState((prevState, props) => {
+      return {
+        ascSort: !prevState.ascSort
+      };
+    });
+  }
+
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
@@ -100,6 +113,9 @@ export class Game extends React.Component {
         </li>
       );
     });
+    if (!this.state.ascSort) {
+      moves.reverse();
+    }
 
     let status;
     if (winner) {
@@ -114,6 +130,7 @@ export class Game extends React.Component {
         <div className="game-board">
           <div className="game-info">
             <div>{status}</div>
+            <button onClick={this.toggleSort}>Toggle sort</button>
             <ol>{moves}</ol>
           </div>
           <Board
