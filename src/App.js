@@ -4,6 +4,8 @@ import './Game.css';
 
 import { filterableProductTable } from './FilterableProductTable';
 
+import { BasicExample } from './BasicExample';
+
 class App extends Component {
   render() {
     return (
@@ -15,6 +17,8 @@ class App extends Component {
         <h1>FilterableProductTable</h1>
         <p><a href="https://reactjs.org/docs/thinking-in-react.html">Thinking in React</a></p>
         {filterableProductTable}
+        
+        <BasicExample />
       </div>
     );
   }
