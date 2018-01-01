@@ -95,7 +95,10 @@ export class Game extends React.Component {
     const winner = calculateWinner(current.squares);
 
     const moves = history.map((step, move) => {
-      const label = move === 0 ? 'Go to game start' : `Go to move #${move}`;
+      let label = move === 0 ? 'Go to game start' : `Go to move #${move}`;
+      if (move === this.state.stepNumber) {
+        label = <b>{label}</b>;
+      }
 
       return (
         <li key={move}>
