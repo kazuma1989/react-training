@@ -37,6 +37,10 @@ function formReducer(state, action) {
         data: action.value,
         value: ''
       });
+    case 'INPUT':
+      return Object.assign({}, state, {
+        value: action.value
+      });
     default:
       return state;
   }
@@ -59,13 +63,19 @@ store.dispatch(send('first'));
 
 // Action Creator
 function send(value) {
-  // Action
+  // Action is a plane object
   return {
     type: 'SEND',
     value,
   };
 }
 
+function input(value) {
+  return {
+    type: 'INPUT',
+    value
+  };
+}
 // function actionCreators() {
 //   return send('first');
 // }
@@ -86,12 +96,11 @@ class FormApp extends React.Component {
     });
   }
   send() {
-    store.dispatch(send(this.state.value));
+    const {value} = this.state;
+    store.dispatch(send(value));
   }
   handleInput({ target: { value } }) {
-    this.setState({
-      value
-    });
+    store.dispatch(input(value));
   }
 
   render() {
