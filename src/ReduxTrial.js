@@ -76,16 +76,27 @@ function input(value) {
     value
   };
 }
-// function actionCreators() {
-//   return send('first');
-// }
 
 class FormApp extends React.Component {
+  render() {
+    return (
+      <div>
+        <input type="text" value={this.props.value} onChange={this.props.onChange} />
+        <button onClick={this.props.onClick}>Send</button>
+        <div>
+          {this.props.data}
+        </div>
+      </div>
+    );
+  }
+}
+
+class AppContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       value: '',
-      data: ''
+      data: '',
     };
     this.send = this.send.bind(this);
     this.handleInput = this.handleInput.bind(this);
@@ -96,7 +107,7 @@ class FormApp extends React.Component {
     });
   }
   send() {
-    const {value} = this.state;
+    const { value } = this.state;
     store.dispatch(send(value));
   }
   handleInput({ target: { value } }) {
@@ -105,15 +116,9 @@ class FormApp extends React.Component {
 
   render() {
     return (
-      <div>
-        <input type="text" value={this.state.value} onChange={this.handleInput} />
-        <button onClick={this.send}>Send</button>
-        <div>
-          {this.state.data}
-        </div>
-      </div>
+      <FormApp value={this.state.value} onChange={this.handleInput} onClick={this.send} data={this.state.data} />
     );
   }
 }
 
-export const reduxApp = <FormApp />;
+export const reduxApp = <AppContainer />;
