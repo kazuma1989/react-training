@@ -34,7 +34,8 @@ function formReducer(state, action) {
   switch (action.type) {
     case 'SEND':
       return Object.assign({}, state, {
-        value: action.value,
+        data: action.value,
+        value: ''
       });
     default:
       return state;
@@ -78,14 +79,14 @@ class FormApp extends React.Component {
     };
     this.send = this.send.bind(this);
     this.handleInput = this.handleInput.bind(this);
+
+    store.subscribe(() => {
+      const state = store.getState();
+      this.setState(state);
+    });
   }
   send() {
-    this.setState(prevState => {
-      return {
-        value: '',
-        data: prevState.value
-      };
-    });
+    store.dispatch(send(this.state.value));
   }
   handleInput({ target: { value } }) {
     this.setState({
