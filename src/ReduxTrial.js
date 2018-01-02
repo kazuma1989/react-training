@@ -69,10 +69,41 @@ function send(value) {
 //   return send('first');
 // }
 
-function FormApp(props) {
-  return (
-    <div></div>
-  );
+class FormApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: '',
+      data: ''
+    };
+    this.send = this.send.bind(this);
+    this.handleInput = this.handleInput.bind(this);
+  }
+  send() {
+    this.setState(prevState => {
+      return {
+        value: '',
+        data: prevState.value
+      };
+    });
+  }
+  handleInput({ target: { value } }) {
+    this.setState({
+      value
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <input type="text" value={this.state.value} onChange={this.handleInput} />
+        <button onClick={this.send}>Send</button>
+        <div>
+          {this.state.data}
+        </div>
+      </div>
+    );
+  }
 }
 
 export const reduxApp = <FormApp />;
