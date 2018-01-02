@@ -48,7 +48,7 @@ function formReducer(state, action) {
 
 // createStore（）メソッドを使ってStoreの作成
 const initialState = {
-  value: null,
+  value: '',
 };
 const store = createStore(formReducer, initialState);
 
@@ -58,8 +58,8 @@ store.subscribe(() => {
   console.log(state);
 });
 
-// ActionをReducerに伝播
-store.dispatch(send('first'));
+// // ActionをReducerに伝播
+// store.dispatch(send('first'));
 
 // Action Creator
 function send(value) {

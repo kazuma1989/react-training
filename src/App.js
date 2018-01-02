@@ -14,7 +14,7 @@ class App extends Component {
         <p><a href="https://mae.chab.in/archives/2885">Reduxの実装とReactとの連携を超シンプルなサンプルを使って解説 | maesblog</a></p>
         <h2>Redux only</h2>
         {reduxApp}
-        <h2>Redux-Redux</h2>
+        <h2>React-Redux</h2>
         {reactReduxApp}
 
         <h1>Tic Tac Toe</h1>
