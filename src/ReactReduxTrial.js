@@ -2,64 +2,10 @@ import React from 'react';
 import { createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 
-// Reducer
-function formReducer(state, action) {
-  switch (action.type) {
-    case 'SEND':
-      return Object.assign({}, state, {
-        data: action.value,
-        value: ''
-      });
-    case 'INPUT':
-      return Object.assign({}, state, {
-        value: action.value
-      });
-    default:
-      return state;
-  }
-}
+import { formReducer, initialState, send, input } from './ReduxItems';
+import { FormApp } from './FormApp';
 
-// createStore（）メソッドを使ってStoreの作成
-const initialState = {
-  value: '',
-};
 const store = createStore(formReducer, initialState);
-
-// stateの状態を購読。状態に変化があったらリスナーを実行
-store.subscribe(() => {
-  const state = store.getState();
-  console.log(state);
-});
-
-// Action Creator
-function send(value) {
-  // Action is a plane object
-  return {
-    type: 'SEND',
-    value,
-  };
-}
-
-function input(value) {
-  return {
-    type: 'INPUT',
-    value
-  };
-}
-
-class FormApp extends React.Component {
-  render() {
-    return (
-      <div>
-        <input type="text" value={this.props.value} onChange={this.props.onChange} />
-        <button onClick={this.props.onClick.bind(null, this.props.value)}>Send</button>
-        <div>
-          {this.props.data}
-        </div>
-      </div>
-    );
-  }
-}
 
 function mapStateToProps(state) {
   return {
