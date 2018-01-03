@@ -1,12 +1,16 @@
 import React from 'react';
 
 export function FormApp(props) {
+  const { value, data } = props;
+  const onChange = e => props.onChange(e.target.value);
+  const onClick = e => props.onClick(value);
+
   return (
     <div>
-      <input type="text" value={props.value} onChange={props.onChange} />
-      <button onClick={props.onClick.bind(null, props.value)}>Send</button>
+      <input type="text" value={value} onChange={onChange} />
+      <button onClick={onClick}>SEND</button>
       <div>
-        {props.data}
+        {data}
       </div>
     </div>
   );

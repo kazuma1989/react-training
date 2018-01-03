@@ -1,11 +1,9 @@
 import React from 'react';
 import { createStore } from 'redux';
-import { Provider, connect } from 'react-redux';
+import { connect } from 'react-redux';
 
 import { formReducer, initialState, send, input } from './ReduxItems';
 import { FormApp } from './FormApp';
-
-const store = createStore(formReducer, initialState);
 
 function mapStateToProps(state) {
   return {
@@ -14,12 +12,12 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch, ownProps) {
+function mapDispatchToProps(dispatch) {
   return {
     onClick(value) {
       dispatch(send(value));
     },
-    onChange({ target: { value } }) {
+    onChange(value) {
       dispatch(input(value));
     }
   };
@@ -27,8 +25,16 @@ function mapDispatchToProps(dispatch, ownProps) {
 
 const AppContainer = connect(mapStateToProps, mapDispatchToProps)(FormApp);
 
+const store = createStore(formReducer, initialState);
+
 export const reactReduxApp = (
-  <Provider store={store}>
-    <AppContainer />
-  </Provider>
+  <AppContainer store={store} />
 );
+
+// // Use Provider rather than directly pass store
+// import { Provider } from 'react-redux';
+// export const reactReduxApp = (
+//   <Provider store={store}>
+//     <AppContainer />
+//   </Provider>
+// );

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 function ProductRow(props) {
   const { stocked, name, price } = props.product;
