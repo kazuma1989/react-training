@@ -17,6 +17,7 @@ function mapDispatchToProps(dispatch) {
     onClick(value) {
       dispatch(send(value));
     },
+
     onChange(value) {
       dispatch(input(value));
     }

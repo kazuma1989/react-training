@@ -1,15 +1,20 @@
 // Reducer
 export function formReducer(state, action) {
+  let newState;
   switch (action.type) {
     case 'SEND':
-      return Object.assign({}, state, {
+      newState = {
         data: action.value,
         value: ''
-      });
+      };
+      return { ...state, ...newState };
+
     case 'INPUT':
-      return Object.assign({}, state, {
+      newState = {
         value: action.value
-      });
+      };
+      return { ...state, ...newState };
+
     default:
       return state;
   }
@@ -17,14 +22,13 @@ export function formReducer(state, action) {
 
 export const initialState = {
   value: '',
+  data: ''
 };
 
-// Action Creator
 export function send(value) {
-  // Action is a plane object
   return {
     type: 'SEND',
-    value,
+    value
   };
 }
 
